@@ -72,7 +72,7 @@ namespace IdentityApp.Areas.Identity.Pages.Account
         public class InputModel
         {
             [Required]
-            [StringLength(255,ErrorMessage ="Max 255 character are allowed")]
+            [StringLength(255, ErrorMessage = "Max 255 character are allowed")]
             [Display(Name = "FirstName")]
             public string FirstName { get; set; }
 
@@ -80,6 +80,11 @@ namespace IdentityApp.Areas.Identity.Pages.Account
             [StringLength(255, ErrorMessage = "Max 255 character are allowed")]
             [Display(Name = "LastName")]
             public string LastName { get; set; }
+
+            [Required]
+            [StringLength(10, ErrorMessage = "Max 10 character are allowed")]
+            [Display(Name = "Contact")]
+            public string Contact { get; set; }
 
             /// <summary>
             ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
@@ -126,7 +131,8 @@ namespace IdentityApp.Areas.Identity.Pages.Account
                 var user = CreateUser();
 
                 user.FirstName = Input.FirstName;
-                user.LastName = Input.LastName; 
+                user.LastName = Input.LastName;
+                user.Contact = Input.Contact;
 
                 await _userStore.SetUserNameAsync(user, Input.Email, CancellationToken.None);
                 await _emailStore.SetEmailAsync(user, Input.Email, CancellationToken.None);
